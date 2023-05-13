@@ -1,210 +1,110 @@
 ---
 ## Front matter
-lang: ru-RU
-title: Структура научной презентации
-subtitle: Простейший шаблон
-author:
-  - Кулябов Д. С.
-institute:
-  - Российский университет дружбы народов, Москва, Россия
-  - Объединённый институт ядерных исследований, Дубна, Россия
-date: 01 января 1970
+title: "Лабораторная работа №14. Презентация"
+subtitle: "Именованные каналы"
+author: "Козлов Всеволод Павлович"
 
-## i18n babel
+## Generic otions
+lang: ru-RU
+toc-title: "Содержание"
+
+## Bibliography
+bibliography: bib/cite.bib
+csl: pandoc/csl/gost-r-7-0-5-2008-numeric.csl
+
+## Pdf output format
+toc: true # Table of contents
+toc-depth: 2
+lof: true # List of figures
+lot: true # List of tables
+fontsize: 12pt
+linestretch: 1.5
+papersize: a4
+documentclass: scrreprt
+## I18n polyglossia
+polyglossia-lang:
+  name: russian
+  options:
+	- spelling=modern
+	- babelshorthands=true
+polyglossia-otherlangs:
+  name: english
+## I18n babel
 babel-lang: russian
 babel-otherlangs: english
-
-## Formatting pdf
-toc: false
-toc-title: Содержание
-slide_level: 2
-aspectratio: 169
-section-titles: true
-theme: metropolis
+## Fonts
+mainfont: PT Serif
+romanfont: PT Serif
+sansfont: PT Sans
+monofont: PT Mono
+mainfontoptions: Ligatures=TeX
+romanfontoptions: Ligatures=TeX
+sansfontoptions: Ligatures=TeX,Scale=MatchLowercase
+monofontoptions: Scale=MatchLowercase,Scale=0.9
+## Biblatex
+biblatex: true
+biblio-style: "gost-numeric"
+biblatexoptions:
+  - parentracker=true
+  - backend=biber
+  - hyperref=auto
+  - language=auto
+  - autolang=other*
+  - citestyle=gost-numeric
+## Pandoc-crossref LaTeX customization
+figureTitle: "Рис."
+tableTitle: "Таблица"
+listingTitle: "Листинг"
+lofTitle: "Список иллюстраций"
+lotTitle: "Список таблиц"
+lolTitle: "Листинги"
+## Misc options
+indent: true
 header-includes:
- - \metroset{progressbar=frametitle,sectionpage=progressbar,numbering=fraction}
- - '\makeatletter'
- - '\beamer@ignorenonframefalse'
- - '\makeatother'
+  - \usepackage{indentfirst}
+  - \usepackage{float} # keep figures where there are in the text
+  - \floatplacement{figure}{H} # keep figures where there are in the text
 ---
 
-# Информация
+# Цель работы
 
-## Докладчик
+Приобретение практических навыков работы с именованными каналами.
 
-:::::::::::::: {.columns align=center}
-::: {.column width="70%"}
+# Выполнение лабораторной работы
 
-  * Кулябов Дмитрий Сергеевич
-  * д.ф.-м.н., профессор
-  * профессор кафедры прикладной информатики и теории вероятностей
-  * Российский университет дружбы народов
-  * [kulyabov-ds@rudn.ru](mailto:kulyabov-ds@rudn.ru)
-  * <https://yamadharma.github.io/ru/>
+Создал файл client.c (рис. [-@fig:1])
 
+![client.c](image/1.png){#fig:1 width = 70%}
+
+Создал client2.c (рис. [-@fig:2])
+
+![client2.c](image/2.png){#fig:2 width = 70%}
+
+Создал common.h (рис. [-@fig:3])
+
+![common.h](image/3.png){#fig:3 width = 70%}
+
+Создал server.c (рис. [-@fig:4])
+
+![server.c](image/4.png){#fig:4 width = 70%}
+
+Создал Makefile (рис. [-@fig:5])
+
+![Makefile](image/5.png){#fig:5 width = 70%}
+
+Запустил команду make (рис. [-@fig:6])
+
+![Запуск команды make](image/6.png){#fig:6 width = 70%}
+
+Запустил исполняемые файлы (рис. [-@fig:7])
+
+![Запуск исполняемых файлов](image/7.png){#fig:7 width = 70%}
+
+# Выводы
+
+Приобрел практические навыки работы с именованными каналами.
+
+# Список литературы{.unnumbered}
+
+::: {#refs}
 :::
-::: {.column width="30%"}
-
-![](./image/kulyabov.jpg)
-
-:::
-::::::::::::::
-
-# Вводная часть
-
-## Актуальность
-
-- Важно донести результаты своих исследований до окружающих
-- Научная презентация --- рабочий инструмент исследователя
-- Необходимо создавать презентацию быстро
-- Желательна минимизация усилий для создания презентации
-
-## Объект и предмет исследования
-
-- Презентация как текст
-- Программное обеспечение для создания презентаций
-- Входные и выходные форматы презентаций
-
-## Цели и задачи
-
-- Создать шаблон презентации в Markdown
-- Описать алгоритм создания выходных форматов презентаций
-
-## Материалы и методы
-
-- Процессор `pandoc` для входного формата Markdown
-- Результирующие форматы
-	- `pdf`
-	- `html`
-- Автоматизация процесса создания: `Makefile`
-
-# Создание презентации
-
-## Процессор `pandoc`
-
-- Pandoc: преобразователь текстовых файлов
-- Сайт: <https://pandoc.org/>
-- Репозиторий: <https://github.com/jgm/pandoc>
-
-## Формат `pdf`
-
-- Использование LaTeX
-- Пакет для презентации: [beamer](https://ctan.org/pkg/beamer)
-- Тема оформления: `metropolis`
-
-## Код для формата `pdf`
-
-```yaml
-slide_level: 2
-aspectratio: 169
-section-titles: true
-theme: metropolis
-```
-
-## Формат `html`
-
-- Используется фреймворк [reveal.js](https://revealjs.com/)
-- Используется [тема](https://revealjs.com/themes/) `beige`
-
-## Код для формата `html`
-
-- Тема задаётся в файле `Makefile`
-
-```make
-REVEALJS_THEME = beige 
-```
-# Результаты
-
-## Получающиеся форматы
-
-- Полученный `pdf`-файл можно демонстрировать в любой программе просмотра `pdf`
-- Полученный `html`-файл содержит в себе все ресурсы: изображения, css, скрипты
-
-# Элементы презентации
-
-## Актуальность
-
-- Даёт понять, о чём пойдёт речь
-- Следует широко и кратко описать проблему
-- Мотивировать свое исследование
-- Сформулировать цели и задачи
-- Возможна формулировка ожидаемых результатов
-
-## Цели и задачи
-
-- Не формулируйте более 1--2 целей исследования
-
-## Материалы и методы
-
-- Представляйте данные качественно
-- Количественно, только если крайне необходимо
-- Излишние детали не нужны
-
-## Содержание исследования
-
-- Предлагаемое решение задач исследования с обоснованием
-- Основные этапы работы
-
-## Результаты
-
-- Не нужны все результаты
-- Необходимы логические связки между слайдами
-- Необходимо показать понимание материала
-
-
-## Итоговый слайд
-
-- Запоминается последняя фраза. © Штирлиц
-- Главное сообщение, которое вы хотите донести до слушателей
-- Избегайте использовать последний слайд вида *Спасибо за внимание*
-
-# Рекомендации
-
-## Принцип 10/20/30
-
-  - 10 слайдов
-  - 20 минут на доклад
-  - 30 кегль шрифта
-
-## Связь слайдов
-
-::: incremental
-
-- Один слайд --- одна мысль
-- Нельзя ссылаться на объекты, находящиеся на предыдущих слайдах (например, на формулы)
-- Каждый слайд должен иметь заголовок
-
-:::
-
-## Количество сущностей
-
-::: incremental
-
-- Человек может одновременно помнить $7 \pm 2$ элемента
-- При размещении информации на слайде старайтесь чтобы в сумме слайд содержал не более 5 элементов
-- Можно группировать элементы так, чтобы визуально было не более 5 групп
-
-:::
-
-## Общие рекомендации
-
-::: incremental
-
-- На слайд выносится та информация, которая без зрительной опоры воспринимается хуже
-- Слайды должны дополнять или обобщать содержание выступления или его частей, а не дублировать его
-- Информация на слайдах должна быть изложена кратко, чётко и хорошо структурирована
-- Слайд не должен быть перегружен графическими изображениями и текстом
-- Не злоупотребляйте анимацией и переходами
-
-:::
-
-## Представление данных
-
-::: incremental
-
-- Лучше представить в виде схемы
-- Менее оптимально представить в виде рисунка, графика, таблицы
-- Текст используется, если все предыдущие способы отображения информации не подошли
-
-:::
-
